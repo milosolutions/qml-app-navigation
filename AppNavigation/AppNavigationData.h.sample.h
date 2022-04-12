@@ -1,0 +1,56 @@
+#ifndef APPNAVIGATIONDATA_H
+#define APPNAVIGATIONDATA_H
+
+#include <QHash>
+#include <QUrl>
+
+namespace AppNavigation
+{
+    Q_NAMESPACE
+
+    enum class PageID
+    {
+        // Define your page IDs here
+        // HomePage,
+        // MyProfilePage
+        // etc.
+    };
+    Q_ENUM_NS(PageID)
+
+    static const QHash<PageID, QUrl> pageUrls =
+    {
+        // Define paths to QML files implementing your pages
+        // { PageID::HomePage, QUrl("qrc:/HomePage.qml") },
+        // { PageID::MyProfilePage, QUrl("qrc:/MyProfile.qml") }
+        // etc.
+    };
+
+    enum class PopupID
+    {
+        // Define your page IDs here
+        // SuccessPopup
+        // ErrorPopup
+        // etc.
+    };
+    Q_ENUM_NS(PopupID)
+
+    static const QHash<PopupID, QUrl> popupUrls =
+    {
+        // 
+        // { PopupID::SuccessPopup, QUrl("qrc:/SuccessPopup.qml") },
+        // { PopupID::ErrorPopup, QUrl("qrc:/ErrorPopup.qml") }
+        // etc.
+    };
+
+    inline uint qHash(const PageID &pageId, uint seed)
+    {
+        return ::qHash(static_cast<typename std::underlying_type<PageID>::type>(pageId), seed);
+    }
+
+    inline uint qHash(const PopupID &popupId, uint seed)
+    {
+        return ::qHash(static_cast<typename std::underlying_type<PopupID>::type>(popupId), seed);
+    }
+};
+
+#endif // APPNAVIGATIONDATA_H

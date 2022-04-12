@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/AppNavigation">
+        <file>AppStackView.qml</file>
+        <file>qmldir</file>
+    </qresource>
+</RCC>
