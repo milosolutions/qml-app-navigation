@@ -52,6 +52,11 @@ signals:
                                     const QVariantMap &properties,
                                     const bool immediate,
                                     QPrivateSignal);
+    void replaceAllPagesUpToPageOnStackView(const AppNavigation::PageID pageToKeep,
+                                            const QUrl &pageToAdd,
+                                            const QVariantMap &properties,
+                                            const bool immediate,
+                                            QPrivateSignal);
 
     void pushPopupOnStackView(const QUrl &url,
                               const QVariantMap &properties,
@@ -66,6 +71,10 @@ public slots:
                      QVariantMap properties = {},
                      const bool immediate = false);
     void replaceAllPages(const AppNavigation::PageID pageId,
+                         QVariantMap properties = {},
+                         const bool immediate = false);
+    void replaceUpToPage(const AppNavigation::PageID pageToKeepId,
+                         const AppNavigation::PageID pageToAddId,
                          QVariantMap properties = {},
                          const bool immediate = false);
     void goBack(const bool immediate = false);

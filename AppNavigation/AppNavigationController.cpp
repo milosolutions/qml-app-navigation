@@ -93,12 +93,14 @@ void AppNavigationController::replacePage(const AppNavigation::PageID pageId,
     properties.insert(pageIdKey(), QVariant::fromValue(pageId));
 
     m_pageStack.pop();
-    m_pageStack.append(pageId);
+    m_pageStack.push(pageId);
     emit replacePageOnStackView(AppNavigation::pageUrls[pageId], properties, immediate, QPrivateSignal());
     emit currentPageChanged(pageId);
 }
 
-void AppNavigationController::replaceAllPages(const AppNavigation::PageID pageId, QVariantMap properties, const bool immediate)
+void AppNavigationController::replaceAllPages(const AppNavigation::PageID pageId,
+                                              QVariantMap properties,
+                                              const bool immediate)
 {
     if (m_pageStack.contains(pageId) && m_pageStack.indexOf(pageId) == 0)
     {
@@ -109,10 +111,42 @@ void AppNavigationController::replaceAllPages(const AppNavigation::PageID pageId
     properties.insert(pageIdKey(), QVariant::fromValue(pageId));
 
     m_pageStack.clear();
-    m_pageStack.append(pageId);
+    m_pageStack.push(pageId);
 
     emit replaceAllPagesOnStackView(AppNavigation::pageUrls[pageId], properties, immediate, QPrivateSignal());
     emit currentPageChanged(pageId);
+}
+
+void AppNavigationController::replaceUpToPage(const AppNavigation::PageID pageToKeepId,
+                                              const AppNavigation::PageID pageToAddId,
+                                              QVariantMap properties,
+                                              const bool immediate)
+{
+    if (m_pageStack.contains(pageToAddId) && m_pageStack.indexOf(pageToAddId) == 0)
+    {
+        goBackToPage(pageToAddId, properties, immediate);
+        return;
+    }
+
+    if (!m_pageStack.contains(pageToKeepId))
+    {
+        replaceAllPages(pageToAddId, properties, immediate);
+        return;
+    }
+
+    properties.insert(pageIdKey(), QVariant::fromValue(pageToAddId));
+
+    while (m_pageStack.top() != pageToKeepId) {
+        m_pageStack.pop();
+    }
+    m_pageStack.push(pageToAddId);
+
+    emit replaceAllPagesUpToPageOnStackView(pageToKeepId,
+                                            AppNavigation::pageUrls[pageToAddId],
+                                            properties,
+                                            immediate,
+                                            QPrivateSignal());
+    emit currentPageChanged(m_pageStack.top());
 }
 
 void AppNavigationController::goBack(const bool immediate)
@@ -148,7 +182,7 @@ void AppNavigationController::goBackToPage(const AppNavigation::PageID pageId,
 
     if (!m_pageStack.contains(pageId))
     {
-        replacePageOnStackView(AppNavigation::pageUrls[pageId], properties, immediate, QPrivateSignal());
+        emit replacePageOnStackView(AppNavigation::pageUrls[pageId], properties, immediate, QPrivateSignal());
         return;
     }
 

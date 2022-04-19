@@ -65,6 +65,20 @@ StackView {
             stackView.replace(null, Qt.resolvedUrl(url), properties, operation(immediate))
         }
 
+        function onReplaceAllPagesUpToPageOnStackView(pageToKeepId, pageToAddUrl, properties, immediate)
+        {
+            let pageToKeep = stackView.find(function(item, index) {
+                return item[AppNavigationController.pageIdKey] === pageToKeepId
+            })
+
+            let lastPageToToBeReplaced = stackView.get(pageToKeep.StackView.index + 1)
+
+            stackView.replace(lastPageToToBeReplaced,
+                              Qt.resolvedUrl(pageToAddUrl),
+                              properties,
+                              operation(immediate))
+        }
+
         function onPushPopupOnStackView(url, properties)
         {
             popupFactory.createPopup(url, properties)
