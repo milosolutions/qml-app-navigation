@@ -1,12 +1,11 @@
-!exists($$PWD/AppNavigationData.h) {
+!contains(HEADERS, ".*/AppNavigationData.h") {
     error("AppNavigationData.h does not exist! Please see README.md for details." )
 }
 
 INCLUDEPATH += $$PWD
 
 HEADERS += \
-    $$PWD/AppNavigationController.h \
-    $$PWD/AppNavigationData.h
+    $$PWD/AppNavigationController.h
 
 SOURCES += \
     $$PWD/AppNavigationController.cpp
