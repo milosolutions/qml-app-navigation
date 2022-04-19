@@ -2,5 +2,7 @@
     <qresource prefix="/AppNavigation">
         <file>AppStackView.qml</file>
         <file>qmldir</file>
+        <file>AppNavigationPage.qml</file>
+        <file>AppNavigationPopup.qml</file>
     </qresource>
 </RCC>
