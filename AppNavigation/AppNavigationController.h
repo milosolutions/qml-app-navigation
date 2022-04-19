@@ -22,7 +22,7 @@ class AppNavigationController : public QObject
 
 public:
     explicit AppNavigationController(QObject *parent = nullptr);
-    const AppNavigationController &instance() const;
+    static AppNavigationController &instance();
 
     AppNavigation::PageID currentPage() const;
 

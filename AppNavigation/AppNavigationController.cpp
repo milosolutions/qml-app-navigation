@@ -38,7 +38,7 @@ AppNavigationController::AppNavigationController(QObject *parent)
 
 }
 
-const AppNavigationController &AppNavigationController::instance() const
+AppNavigationController &AppNavigationController::instance()
 {
     return *appNavigationControllerInstance;
 }
