@@ -1,4 +1,4 @@
 module com.milosolutions.AppNavigation
 AppStackView 1.0 AppStackView.qml
-AppNavigationPage 1.0 AppNavigationPage.qml
-AppNavigationPopup 1.0 AppNavigationPopup.qml
+AppPage 1.0 AppPage.qml
+AppPopup 1.0 AppPopup.qml

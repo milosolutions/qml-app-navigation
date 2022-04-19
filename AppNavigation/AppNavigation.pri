@@ -15,8 +15,10 @@ RESOURCES += \
     $$PWD/AppNavigation.qrc
 
 DISTFILES += \
+    $$PWD/qmldir \
     $$PWD/AppStackView.qml \
-    $$PWD/qmldir
+    $$PWD/AppPage.qml \
+    $$PWD/AppPopup.qml
 
 OTHER_FILES += \
-    $$PWD/$$PWD/AppNavigationData.h.sample
+    $$PWD/AppNavigationData.h.sample

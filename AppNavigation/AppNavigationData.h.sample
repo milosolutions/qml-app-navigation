@@ -14,6 +14,8 @@ namespace AppNavigation
         // HomePage,
         // MyProfilePage
         // etc.
+        
+        InvalidPage = -1 // DO NOT MODIFY THIS VALUE
     };
     Q_ENUM_NS(PageID)
 
@@ -31,6 +33,8 @@ namespace AppNavigation
         // SuccessPopup
         // ErrorPopup
         // etc.
+        
+        InvalidPopup = -1 // DO NOT MODIFY THIS VALUE
     };
     Q_ENUM_NS(PopupID)
 
