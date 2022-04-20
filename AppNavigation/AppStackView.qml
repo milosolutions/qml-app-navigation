@@ -71,9 +71,9 @@ StackView {
                 return item[AppNavigationController.pageIdKey] === pageToKeepId
             })
 
-            let lastPageToToBeReplaced = stackView.get(pageToKeep.StackView.index + 1)
+            let lastPageToBeReplaced = stackView.get(pageToKeep.StackView.index + 1)
 
-            stackView.replace(lastPageToToBeReplaced,
+            stackView.replace(lastPageToBeReplaced,
                               Qt.resolvedUrl(pageToAddUrl),
                               properties,
                               operation(immediate))

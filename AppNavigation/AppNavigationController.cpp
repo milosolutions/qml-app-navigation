@@ -67,6 +67,11 @@ void AppNavigationController::enterPage(const AppNavigation::PageID pageId,
                                         QVariantMap properties,
                                         const bool immediate)
 {
+    if (m_pageStack.top() == pageId)
+    {
+        return;
+    }
+
     if (m_pageStack.contains(pageId))
     {
         goBackToPage(pageId, properties, immediate);
@@ -84,6 +89,11 @@ void AppNavigationController::replacePage(const AppNavigation::PageID pageId,
                                           QVariantMap properties,
                                           const bool immediate)
 {
+    if (m_pageStack.top() == pageId)
+    {
+        return;
+    }
+
     if (m_pageStack.contains(pageId))
     {
         goBackToPage(pageId, properties, immediate);
@@ -122,7 +132,21 @@ void AppNavigationController::replaceUpToPage(const AppNavigation::PageID pageTo
                                               QVariantMap properties,
                                               const bool immediate)
 {
-    if (m_pageStack.contains(pageToAddId) && m_pageStack.indexOf(pageToAddId) == 0)
+    if (m_pageStack.indexOf(pageToKeepId) == 0 &&
+        m_pageStack.indexOf(pageToAddId) == 1 &&
+        m_pageStack.top() == pageToAddId)
+    {
+        return;
+    }
+
+    if (m_pageStack.indexOf(pageToKeepId) == 0 &&
+        m_pageStack.top() == pageToKeepId)
+    {
+        enterPage(pageToAddId, properties, immediate);
+        return;
+    }
+
+    if (m_pageStack.contains(pageToAddId))
     {
         goBackToPage(pageToAddId, properties, immediate);
         return;
@@ -176,6 +200,11 @@ void AppNavigationController::goBackToPage(const AppNavigation::PageID pageId,
     }
 
     if (m_pageStack.count() <= 1)
+    {
+        return;
+    }
+
+    if (m_pageStack.top() == pageId)
     {
         return;
     }
