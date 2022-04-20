@@ -67,7 +67,7 @@ void AppNavigationController::enterPage(const AppNavigation::PageID pageId,
                                         QVariantMap properties,
                                         const bool immediate)
 {
-    if (m_pageStack.top() == pageId)
+    if (!m_pageStack.isEmpty() && m_pageStack.top() == pageId)
     {
         return;
     }
@@ -89,7 +89,7 @@ void AppNavigationController::replacePage(const AppNavigation::PageID pageId,
                                           QVariantMap properties,
                                           const bool immediate)
 {
-    if (m_pageStack.top() == pageId)
+    if (!m_pageStack.isEmpty() && m_pageStack.top() == pageId)
     {
         return;
     }
